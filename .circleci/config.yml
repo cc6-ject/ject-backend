@@ -51,7 +51,7 @@ jobs:
           command: export BACKEND_STAGE=`echo $BACKEND_STAGE_DEV` && echo $BACKEND_STAGE
       - run:
           name: Deploy serverless to AWS
-          command: yarn serverless deploy --stage $BACKEND_STAGE
+          command: yarn serverless deploy --stage `echo $BACKEND_STAGE`
 
   deploy-prod:
     docker:
@@ -68,7 +68,7 @@ jobs:
           command: export BACKEND_STAGE=`echo $BACKEND_STAGE_PROD` && echo $BACKEND_STAGE
       - run:
           name: Deploy serverless to AWS
-          command: yarn serverless deploy --stage $BACKEND_STAGE
+          command: yarn serverless deploy --stage `echo $BACKEND_STAGE`
 
 workflows:
   version: 2

@@ -43,7 +43,7 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
-          # After yarn global add, it cannot find serverless.
+          # TODO: After yarn global add, it cannot find serverless.
           name: Install serverless CLI
           command: yarn add serverless
       - run:
@@ -51,7 +51,12 @@ jobs:
           command: export BACKEND_STAGE=`echo $BACKEND_STAGE_DEV` && echo $BACKEND_STAGE
       - run:
           name: Deploy serverless to AWS
-          command: yarn serverless deploy -v --stage dev
+          # TODO: All not working.
+          # yarn serverless deploy -v --stage $BACKEND_STAGE
+          # yarn serverless deploy -v --stage `echo $BACKEND_STAGE`
+          # yarn serverless deploy -v --stage {{ $BACKEND_STAGE }}
+          # yarn serverless deploy -v --stage {{ echo $BACKEND_STAGE }}
+          command: yarn serverless deploy -v --stage {{ echo $BACKEND_STAGE }}
 
   deploy-prod:
     docker:

@@ -56,7 +56,7 @@ jobs:
           # yarn serverless deploy -v --stage `echo $BACKEND_STAGE`
           # yarn serverless deploy -v --stage {{ $BACKEND_STAGE }}
           # yarn serverless deploy -v --stage {{ echo $BACKEND_STAGE }}
-          command: yarn serverless deploy -v --stage {{ echo $BACKEND_STAGE }}
+          command: yarn serverless deploy -v --stage dev
 
   deploy-prod:
     docker:

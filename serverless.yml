@@ -1,5 +1,4 @@
-# NOTE: update this with your service name
-service: serverless-nodejs-starter
+service: ject-api
 
 # Use the serverless-webpack plugin to transpile ES6
 plugins:
@@ -16,19 +15,60 @@ custom:
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: dev
-  region: us-east-1
-  # To load environment variables externally
-  # rename env.example to env.yml and uncomment
-  # the following line. Also, make sure to not
-  # commit your env.yml.
-  #
-  #environment: ${file(env.yml):${self:provider.stage}}
+  stage: prod
+  region: ap-northeast-1
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:ap-northeast-1:*:*"
 
 functions:
-  hello:
-    handler: handler.hello
+  # Defines an HTTP API endpoint that calls the main function in create.js
+  # - path: url path is /notes
+  # - method: POST request
+  # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
+  #     domain api call
+  # - authorizer: authenticate using the AWS IAM role
+  addDecibel:
+    handler: api/decibels/add.main
     events:
       - http:
-          path: hello
+          path: decibel
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  getDecibel:
+    handler: api/decibels/get.main
+    events:
+      - http:
+          path: decibel
           method: get
+          cors: true
+          authorizer: aws_iam
+
+  listDecibel:
+    handler: api/decibels/list.main
+    events:
+      - http:
+          path: decibel
+          method: get
+          cors: true
+          authorizer: aws_iam
+
+  deleteDecibel:
+    handler: api/decibels/delete.main
+    events:
+      - http:
+          path: decibel/{id}
+          method: delete
+          cors: true
+          authorizer: aws_iam

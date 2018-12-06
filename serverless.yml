@@ -1,4 +1,4 @@
-service: ject-api
+service: notes-app-2-api
 
 # Use the serverless-webpack plugin to transpile ES6
 plugins:
@@ -8,16 +8,29 @@ plugins:
 # serverless-webpack configuration
 # Enable auto-packing of external modules
 custom:
+  stage: ${opt:stage, self:provider.stage}
+  tableName: ${self:custom.stage}-notes
+  tableThroughputs:
+    prod: 5
+    default: 1
+  tableThroughput: ${self:custom.tableThroughputs.${self:custom.stage}, self:custom.tableThroughputs.default}
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
+  environment: ${file(env.yml):${self:custom.stage}, file(env.yml):default}
 
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: prod
+  stage: dev
   region: ap-northeast-1
 
+  environment:
+    tableName: ${self:custom.tableName}
+    stripeSecretKey: ${self:custom.environment.stripeSecretKey}
+
+  # 'iamRoleStatement' defines the permission policy for the Lambda function.
+  # In this case Lambda functions are granted with permissions to access DynamoDB.
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -28,7 +41,8 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:ap-northeast-1:*:*"
+      Resource:
+        - "Fn::GetAtt": [  NotesTable, Arn ]
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
@@ -37,38 +51,74 @@ functions:
   # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
   #     domain api call
   # - authorizer: authenticate using the AWS IAM role
-  addDecibel:
-    handler: api/decibels/add.main
+  create:
+    handler: create.main
     events:
       - http:
-          path: decibel
+          path: notes
           method: post
           cors: true
           authorizer: aws_iam
 
-  getDecibel:
-    handler: api/decibels/get.main
+  get:
+    # Defines an HTTP API endpoint that calls the main function in get.js
+    # - path: url path is /notes/{id}
+    # - method: GET request
+    handler: get.main
     events:
       - http:
-          path: decibel
+          path: notes/{id}
           method: get
           cors: true
           authorizer: aws_iam
 
-  listDecibel:
-    handler: api/decibels/list.main
+  list:
+    # Defines an HTTP API endpoint that calls the main function in list.js
+    # - path: url path is /notes
+    # - method: GET request
+    handler: list.main
     events:
       - http:
-          path: decibel
+          path: notes
           method: get
           cors: true
           authorizer: aws_iam
 
-  deleteDecibel:
-    handler: api/decibels/delete.main
+  update:
+    # Defines an HTTP API endpoint that calls the main function in update.js
+    # - path: url path is /notes/{id}
+    # - method: PUT request
+    handler: update.main
     events:
       - http:
-          path: decibel/{id}
+          path: notes/{id}
+          method: put
+          cors: true
+          authorizer: aws_iam
+
+  delete:
+    # Defines an HTTP API endpoint that calls the main function in delete.js
+    # - path: url path is /notes/{id}
+    # - method: DELETE request
+    handler: delete.main
+    events:
+      - http:
+          path: notes/{id}
           method: delete
           cors: true
           authorizer: aws_iam
+
+  billing:
+    handler: billing.main
+    events:
+      - http:
+          path: billing
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+resources:
+  - ${file(resources/dynamodb-table.yml)}
+  - ${file(resources/s3-bucket.yml)}
+  - ${file(resources/cognito-user-pool.yml)}
+  - ${file(resources/cognito-identity-pool.yml)}

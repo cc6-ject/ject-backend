@@ -44,7 +44,7 @@ jobs:
           at: ~/repo
       - run:
           name: Install serverless CLI
-          command: yarn global add serverless && serverless && which serverless
+          command: yarn global add serverless && which serverless
       - run:
           name: Set BACKEND_STAGE
           command: export BACKEND_STAGE=`echo $BACKEND_STAGE_DEV` && echo $BACKEND_STAGE

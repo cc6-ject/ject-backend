@@ -28,99 +28,58 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
-          name: Test React app
+          name: Test Serverless app
           command: yarn test
       - persist_to_workspace:
           root: ~/repo
           paths:
             - ./*
 
-  build-dev:
-    docker:
-      - image: circleci/node:10.11
-    working_directory: ~/repo
-    steps:
-      - attach_workspace:
-          at: ~/repo
-      - run:
-          name: Set FRONTEND_STAGE
-          command: export FRONTEND_STAGE=`echo $FRONTEND_STAGE_DEV` && echo $FRONTEND_STAGE
-      - run:
-          name: Build React app
-          command: yarn build
-      - persist_to_workspace:
-          root: ~/repo
-          paths:
-            - build/*
-
-  build-prod:
-    docker:
-      - image: circleci/node:10.11
-    working_directory: ~/repo
-    steps:
-      - attach_workspace:
-          at: ~/repo
-      - run:
-          name: Set FRONTEND_STAGE
-          command: export FRONTEND_STAGE=`echo $FRONTEND_STAGE_PROD` && echo $FRONTEND_STAGE
-      - run:
-          name: Build React app
-          command: yarn build
-      - persist_to_workspace:
-          root: ~/repo
-          paths:
-            - build/*
-
   deploy-dev:
     docker:
-      - image: circleci/python:2.7-jessie
+      - image: circleci/node:10.11
     working_directory: ~/repo
     steps:
-      - run:
-          name: Install awscli
-          command: sudo pip install awscli
       - attach_workspace:
           at: ~/repo
       - run:
-          name: Deploy to S3
-          command: aws s3 sync build s3://ject-frontend-dev --delete
+          name: Install serverless CLI
+          command: yarn global add serverless
+      - run:
+          name: Set BACKEND_STAGE
+          command: export BACKEND_STAGE=`echo $BACKEND_STAGE_DEV` && echo $BACKEND_STAGE
+      - run:
+          name: Deploy serverless to AWS
+          command: serverless deploy --stage $BACKEND_STAGE
 
   deploy-prod:
     docker:
-      - image: circleci/python:2.7-jessie
+      - image: circleci/node:10.11
     working_directory: ~/repo
     steps:
-      - run:
-          name: Install awscli
-          command: sudo pip install awscli
       - attach_workspace:
           at: ~/repo
       - run:
-          name: Deploy to S3
-          command: aws s3 sync build s3://ject-frontend-prod --delete
+          name: Install serverless CLI
+          command: yarn global add serverless
+      - run:
+          name: Set BACKEND_STAGE
+          command: export BACKEND_STAGE=`echo $BACKEND_STAGE_PROD` && echo $BACKEND_STAGE
+      - run:
+          name: Deploy serverless to AWS
+          command: serverless deploy --stage $BACKEND_STAGE
 
 workflows:
   version: 2
   build-deploy:
     jobs:
       - test
-      - build-dev:
-          requires:
-            - test
-      - build-prod:
-          requires:
-            - test
-          filters:
-            branches:
-              only: master
       - deploy-dev:
           requires:
             - test
-            - build-dev
       - deploy-prod:
           requires:
             - test
-            - build-prod
           filters:
             branches:
               only: master

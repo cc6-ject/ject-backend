@@ -1,0 +1,8 @@
+{
+  "body": "{\"decibel\":50}",
+  "requestContext": {
+    "identity": {
+      "cognitoIdentityId": "USER-SUB-1234"
+    }
+  }
+}

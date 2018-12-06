@@ -1,5 +1,5 @@
 {
-  "body": "{\"decibel\":50}",
+  "body": "{\"decibel\":\"[35, 46, 55, 33, 47, 50, 69]\", \"avgDecibel\":47.85}",
   "requestContext": {
     "identity": {
       "cognitoIdentityId": "USER-SUB-1234"

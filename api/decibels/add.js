@@ -10,7 +10,8 @@ export async function main(req, context, callback) {
     Item: {
       userId: req.requestContext.identity.cognitoIdentityId,
       trainingId: uuid.v1(),
-      decibel: data.decibel,
+      decibels: data.decibel,
+      avgDecibel: data.avgDecibel,
       createdAt: Date.now()
     }
   };

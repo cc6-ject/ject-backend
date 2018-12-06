@@ -15,7 +15,6 @@ export async function main(req, context) {
   try {
     const result = await dynamoDbLib.call("query", params);
     // Item: allItems, count: Number of items,
-
     return success(result.Items);
   } catch (e) {
     return failure({ status: false });

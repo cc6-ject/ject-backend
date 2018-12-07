@@ -1,4 +1,4 @@
-service: ject-api
+service: notes-app-2-api
 
 # Use the serverless-webpack plugin to transpile ES6
 plugins:
@@ -8,16 +8,29 @@ plugins:
 # serverless-webpack configuration
 # Enable auto-packing of external modules
 custom:
+  stage: ${opt:stage, self:provider.stage}
+  tableName: ${self:custom.stage}-notes
+  tableThroughputs:
+    prod: 5
+    default: 1
+  tableThroughput: ${self:custom.tableThroughputs.${self:custom.stage}, self:custom.tableThroughputs.default}
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
+  environment: ${file(env.yml):${self:custom.stage}, file(env.yml):default}
 
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: prod
+  stage: dev
   region: ap-northeast-1
 
+  environment:
+    tableName: ${self:custom.tableName}
+    stripeSecretKey: ${self:custom.environment.stripeSecretKey}
+
+  # 'iamRoleStatement' defines the permission policy for the Lambda function.
+  # In this case Lambda functions are granted with permissions to access DynamoDB.
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -28,7 +41,8 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:ap-northeast-1:*:*"
+      Resource:
+        - "Fn::GetAtt": [  NotesTable, Arn ]
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
@@ -72,3 +86,9 @@ functions:
           method: delete
           cors: true
           authorizer: aws_iam
+
+resources:
+  - ${file(resources/dynamodb-table.yml)}
+  - ${file(resources/s3-bucket.yml)}
+  - ${file(resources/cognito-user-pool.yml)}
+  - ${file(resources/cognito-identity-pool.yml)}

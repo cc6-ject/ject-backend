@@ -1,3 +1,7 @@
+# ject-backend
+
+[![CircleCI](https://circleci.com/gh/cc6-ject/ject-backend.svg?style=svg)](https://circleci.com/gh/cc6-ject/ject-backend)
+[![Build Status](https://travis-ci.org/cc6-ject/ject-backend.svg?branch=master)](https://travis-ci.org/cc6-ject/ject-backend)
 # Serverless Node.js Starter
 
 A Serverless starter that adds ES7 syntax, serverless-offline, environment variables, and unit test support. Part of the [Serverless Stack](http://serverless-stack.com) guide.

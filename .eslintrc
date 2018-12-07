@@ -14,6 +14,8 @@
     "FileReader": true,
     "Blob": true,
     "navigator": true,
-    "it": true
+    "it": true,
+    "describe": true,
+    "expect": true
   }
 }

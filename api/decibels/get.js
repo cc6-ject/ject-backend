@@ -3,7 +3,7 @@ import { success, failure } from "../lib/response-lib";
 
 export async function main(event, context) {
   const params = {
-    TableName: "Jest_Stats",
+    TableName: process.env.tableName,
     Key: {
       userId: event.requestContext.identity.cognitoIdentityId,
       trainingId: event.pathParameters.id

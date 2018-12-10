@@ -6,7 +6,7 @@ export async function main(req, context, callback) {
   const data = JSON.parse(req.body);
 
   const params = {
-    TableName: "Jest_Stats",
+    TableName: process.env.tableName,
     Item: {
       userId: req.requestContext.identity.cognitoIdentityId,
       trainingId: uuid.v1(),

@@ -42,7 +42,7 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource:
-        - 'Fn::GetAtt': [NotesTable, Arn]
+        - 'Fn::GetAtt': [DecibelsTable, Arn]
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js

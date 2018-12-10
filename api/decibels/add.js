@@ -12,6 +12,7 @@ export async function main(req, context, callback) {
       trainingId: uuid.v1(),
       decibels: data.decibel,
       avgDecibel: data.avgDecibel,
+      duration: data.duration,
       createdAt: Date.now()
     }
   };

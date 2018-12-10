@@ -3,7 +3,7 @@ import { success, failure } from "../lib/response-lib";
 
 export async function main(req, context) {
   const params = {
-    TableName: "Jest_Stats",
+    TableName: process.env.tableName,
     // Retrieve by userId in dynamoDB
     KeyConditionExpression: "userId = :userId",
     // Actual userId is from request

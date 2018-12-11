@@ -9,7 +9,7 @@ plugins:
 # Enable auto-packing of external modules
 custom:
   stage: ${opt:stage, self:provider.stage}
-  tableName: ${self:custom.stage}-ject
+  tableName: ${self:custom.stage}-ject-decibel
   tableThroughputs:
     prod: 5
     default: 1

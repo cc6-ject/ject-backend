@@ -3,7 +3,7 @@ import { success, failure } from "../lib/response-lib";
 
 export async function main(event, context) {
   const params = {
-    TableName: process.env.tableName,
+    TableName: process.env.tableNameTongueTwister,
     Key: {
       userId: event.requestContext.identity.cognitoIdentityId,
       createdAt: event.pathParameters.createdAt
@@ -19,7 +19,6 @@ export async function main(event, context) {
       return failure({ status: false, error: "Item not found." });
     }
   } catch (e) {
-    console.log(e);
     return failure({ status: false });
   }
 }

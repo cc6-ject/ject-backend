@@ -1,0 +1,8 @@
+{
+  "body": "{\"finishedAt\": 1234, \"pics\":\"[URL1, URL2]\", \"decibels\":\"[35, 46]\", \"wpm\": 40, \"text\":\"YEAH\", \"avgDecibel\": 40, \"countWord\":\"[abc, def]\"}",
+  "requestContext": {
+    "identity": {
+      "cognitoIdentityId": "USER-SUB-1234"
+    }
+  }
+}

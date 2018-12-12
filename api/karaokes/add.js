@@ -4,15 +4,19 @@ import { success, failure } from "../lib/response-lib";
 
 export async function main(req, context, callback) {
   const data = JSON.parse(req.body);
-
+  
   const params = {
-    TableName: process.env.tableName,
+    TableName: process.env.tableNameKaraoke,
     Item: {
       userId: req.requestContext.identity.cognitoIdentityId,
       createdAt: Date.now(),
-      decibels: data.decibel,
+      finishedAt: data.finishedAt,
+      pics: data.pics,
+      decibels: data.decibels,
+      wpm: data.wpm,
+      text: data.text,
       avgDecibel: data.avgDecibel,
-      duration: data.duration,
+      countWord: data.countWord,
     }
   };
 

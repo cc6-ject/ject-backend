@@ -3,7 +3,7 @@ import { success, failure } from "../lib/response-lib";
 
 export async function main(event, context) {
   const params = {
-    TableName: process.env.tableName,
+    TableName: process.env.tableNameKaraoke,
     Key: {
       userId: event.requestContext.identity.cognitoIdentityId,
       createdAt: event.pathParameters.createdAt

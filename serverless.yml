@@ -49,6 +49,7 @@ provider:
         - 'Fn::GetAtt': [DecibelsTable, Arn]
         - 'Fn::GetAtt': [karaokeTable, Arn]
         - 'Fn::GetAtt': [tongueTwisterTable, Arn]
+        - 'Fn::GetAtt': [AttachmentsBucket, Arn]
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js

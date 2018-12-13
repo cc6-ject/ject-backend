@@ -6,13 +6,13 @@ export async function main(req, context, callback) {
   const data = JSON.parse(req.body);
 
   const params = {
-    TableName: process.env.tableName,
+    TableName: process.env.tableNameTongueTwister,
     Item: {
       userId: req.requestContext.identity.cognitoIdentityId,
       createdAt: Date.now(),
-      decibels: data.decibel,
-      avgDecibel: data.avgDecibel,
-      duration: data.duration,
+      name: data.name,
+      coverage: data.coverage,
+      faileWords: data.faileWords,
     }
   };
 

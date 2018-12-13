@@ -3,7 +3,7 @@ import { success, failure } from "../lib/response-lib";
 
 export async function main(req, context) {
   const params = {
-    TableName: process.env.tableName,
+    TableName: process.env.tableNameTongueTwister,
     Key: {
       userId: req.requestContext.identity.cognitoIdentityId,
       createdAt: req.pathParameters.createdAt

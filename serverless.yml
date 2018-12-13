@@ -9,7 +9,9 @@ plugins:
 # Enable auto-packing of external modules
 custom:
   stage: ${opt:stage, self:provider.stage}
-  tableName: ${self:custom.stage}-ject-decibel
+  tableName: ${self:custom.stage}-ject
+  tableNameKaraoke: ${self:custom.stage}-ject-karaoke
+  tableNameTongueTwister: ${self:custom.stage}-ject-tongueTwister
   tableThroughputs:
     prod: 5
     default: 1
@@ -27,6 +29,8 @@ provider:
 
   environment:
     tableName: ${self:custom.tableName}
+    tableNameKaraoke: ${self:custom.tableNameKaraoke}
+    tableNameTongueTwister: ${self:custom.tableNameTongueTwister}
     stripeSecretKey: ${self:custom.environment.stripeSecretKey}
 
   # 'iamRoleStatement' defines the permission policy for the Lambda function.
@@ -86,9 +90,83 @@ functions:
           method: delete
           cors: true
           authorizer: aws_iam
+  
+  addKaraoke:
+    handler: api/karaokes/add.main
+    events:
+      - http:
+          path: karaoke
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  getKaraoke:
+    handler: api/karaokes/get.main
+    events:
+      - http:
+          path: karaoke
+          method: get
+          cors: true
+          authorizer: aws_iam
+
+  listKaraoke:
+    handler: api/karaokes/list.main
+    events:
+      - http:
+          path: karaoke
+          method: get
+          cors: true
+          authorizer: aws_iam
+
+  deleteKaraoke:
+    handler: api/karaokes/delete.main
+    events:
+      - http:
+          path: karaoke/{id}
+          method: delete
+          cors: true
+          authorizer: aws_iam
+
+  addTongueTwister:
+    handler: api/tongueTwister/add.main
+    events:
+      - http:
+          path: tongueTwister
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+  getTongueTwister:
+    handler: api/tongueTwister/get.main
+    events:
+      - http:
+          path: tongueTwister
+          method: get
+          cors: true
+          authorizer: aws_iam
+
+  listTongueTwister:
+    handler: api/tongueTwister/list.main
+    events:
+      - http:
+          path: tongueTwister
+          method: get
+          cors: true
+          authorizer: aws_iam
+
+  deleteTongueTwister:
+    handler: api/tongueTwister/delete.main
+    events:
+      - http:
+          path: tongueTwister/{id}
+          method: delete
+          cors: true
+          authorizer: aws_iam
 
 resources:
   - ${file(resources/dynamodb-table.yml)}
+  - ${file(resources/dynamodb-table-karaoke.yml)}
+  - ${file(resources/dynamodb-table-tongueTwisiter.yml)}
   - ${file(resources/s3-bucket.yml)}
   - ${file(resources/cognito-user-pool.yml)}
   - ${file(resources/cognito-identity-pool.yml)}

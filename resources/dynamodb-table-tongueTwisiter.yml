@@ -1,5 +1,5 @@
 Resources:
-  tongueTwisterTable:
+  TongueTwisterTable:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: ${self:custom.tableNameTongueTwister}

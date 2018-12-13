@@ -47,8 +47,8 @@ provider:
         - dynamodb:DeleteItem
       Resource:
         - 'Fn::GetAtt': [DecibelsTable, Arn]
-        - 'Fn::GetAtt': [karaokeTable, Arn]
-        - 'Fn::GetAtt': [tongueTwisterTable, Arn]
+        - 'Fn::GetAtt': [KaraokeTable, Arn]
+        - 'Fn::GetAtt': [TongueTwisterTable, Arn]
         - 'Fn::GetAtt': [AttachmentsBucket, Arn]
 
 functions:

@@ -1,5 +1,5 @@
 Resources:
-  karaokeTable:
+  KaraokeTable:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: ${self:custom.tableNameKaraoke}

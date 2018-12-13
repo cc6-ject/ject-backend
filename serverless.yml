@@ -47,6 +47,9 @@ provider:
         - dynamodb:DeleteItem
       Resource:
         - 'Fn::GetAtt': [DecibelsTable, Arn]
+        - 'Fn::GetAtt': [KaraokeTable, Arn]
+        - 'Fn::GetAtt': [TongueTwisterTable, Arn]
+        - 'Fn::GetAtt': [AttachmentsBucket, Arn]
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js

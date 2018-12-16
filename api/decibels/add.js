@@ -11,7 +11,8 @@ export async function main(req, context, callback) {
       createdAt: Date.now(),
       decibels: data.decibel,
       avgDecibel: data.avgDecibel,
-      duration: data.duration
+      duration: data.duration,
+      transcripts: data.transcripts
     }
   };
 

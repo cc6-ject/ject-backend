@@ -9,13 +9,16 @@ export async function main(req, context, callback) {
     Item: {
       userId: req.requestContext.identity.cognitoIdentityId,
       createdAt: Date.now(),
+      startedAt: data.startedAt,
       finishedAt: data.finishedAt,
-      pics: data.pics,
+      // pics: data.pics,
       decibels: data.decibels,
-      wpm: data.wpm,
-      text: data.text,
       avgDecibel: data.avgDecibel,
-      countWord: data.countWord
+      wordsPerEachMinute: data.wordsPerEachMinute,
+      transcripts: data.transcripts,
+      fillerWords: data.fillerWords,
+      wordCounts: data.wordCounts,
+      duration: data.duration
     }
   };
 

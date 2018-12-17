@@ -1,10 +1,9 @@
-import uuid from "uuid";
-import * as dynamoDbLib from "../lib/dynamo-db-lib";
-import { success, failure } from "../lib/response-lib";
+import * as dynamoDbLib from '../lib/dynamo-db-lib';
+import { success, failure } from '../lib/response-lib';
 
 export async function main(req, context, callback) {
   const data = JSON.parse(req.body);
-  
+
   const params = {
     TableName: process.env.tableNameKaraoke,
     Item: {
@@ -16,12 +15,12 @@ export async function main(req, context, callback) {
       wpm: data.wpm,
       text: data.text,
       avgDecibel: data.avgDecibel,
-      countWord: data.countWord,
+      countWord: data.countWord
     }
   };
 
   try {
-    await dynamoDbLib.call("put", params);
+    await dynamoDbLib.call('put', params);
     return success(params.Item);
   } catch (e) {
     console.log(e);

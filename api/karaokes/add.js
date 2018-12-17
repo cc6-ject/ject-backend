@@ -11,7 +11,7 @@ export async function main(req, context, callback) {
       createdAt: Date.now(),
       startedAt: data.startedAt,
       finishedAt: data.finishedAt,
-      // pics: data.pics,
+      pics: data.pics,
       decibels: data.decibels,
       avgDecibel: data.avgDecibel,
       wordsPerEachMinute: data.wordsPerEachMinute,

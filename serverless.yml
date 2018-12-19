@@ -93,7 +93,7 @@ functions:
           method: delete
           cors: true
           authorizer: aws_iam
-  
+
   addKaraoke:
     handler: api/karaokes/add.main
     events:
@@ -107,7 +107,7 @@ functions:
     handler: api/karaokes/get.main
     events:
       - http:
-          path: karaoke
+          path: karaoke/{id}
           method: get
           cors: true
           authorizer: aws_iam
@@ -143,7 +143,7 @@ functions:
     handler: api/tongueTwister/get.main
     events:
       - http:
-          path: tongueTwister
+          path: tongueTwister/{id}
           method: get
           cors: true
           authorizer: aws_iam

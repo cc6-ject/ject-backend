@@ -4,8 +4,8 @@
 
 # **JECT**
 
-This was created during our time as a student at Code Chrysalis!<br>
-JECT is a web application for public speaking training. This repository is for backend.
+This was created during our time as students at Code Chrysalis!<br>
+JECT is a web application for public speaking training. This repository is for the backend.
 
 [![JECT UI](https://user-images.githubusercontent.com/23233648/50395178-bccc1380-07a5-11e9-8b00-ead2f3fe7da6.png)](https://ject.netlify.com/)
 
@@ -20,11 +20,11 @@ JECT is a web application for public speaking training. This repository is for b
 
 ## Demo Page
 
-[Demo Page](https://ject.netlify.com/) is here ! You can practice public speaking app !
+[Demo Page](https://ject.netlify.com/) is here! You can practice public speaking!
 
 ## Setup
 
-If you want to try JECT on your local machine, follow this instruction.
+If you want to try JECT on your local machine, follow the instructions below.
 
 ### Installation
 
@@ -50,10 +50,10 @@ yarn global add serverless
 
 ### AWS settings
 
-Because this backend is consists of AWS, you need to have AWS account.
+Because this backend uses AWS, you need to have an AWS account.
 
 1. Create an account [AWS Console](https://aws.amazon.com/jp/)<br>
-   If you don't have it.
+   If you don't have one.
 
 2. Create IAM user and save Access Key ID and Secret access Key<br>
    Because it's complicated, please follow [this page](https://serverless-stack.com/chapters/create-an-iam-user.html).
@@ -78,7 +78,7 @@ serverless deploy
 ```
 
 2. Check on AWS<br>
-   Check (Cognito, Lambda, DynamoDB, API Gateway) on AWS console, you can see those resources are already deployed.
+   Check (Cognito, Lambda, DynamoDB, API Gateway) on AWS console, you can see these resources are already deployed.
 
 3. Test<br>
    Please change <function names> and <mocks path>. You can test all API. All function names are written in serverless.yml and all mock data is in mocks folder. If your configuration is correct, you can get status code 200.

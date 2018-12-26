@@ -58,7 +58,7 @@ Because this backend is consists of AWS, you need to have AWS account.
 2. Create IAM user and save Access Key ID and Secret access Key<br>
    Because it's complicated, please follow [this page](https://serverless-stack.com/chapters/create-an-iam-user.html).
 
-3. Install AWS cli.
+3. Install AWS cli.<br>
    For AWS Access Key and AWS Secret Access Key, please use what you got in 2.
 
 ```

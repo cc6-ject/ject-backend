@@ -38,7 +38,7 @@ git clone https://github.com/cc6-ject/ject-backend.git
    If you like npm more, just use npm.
 
 ```
-cd ject-frontend
+cd ject-backend
 yarn
 ```
 

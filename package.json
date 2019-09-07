@@ -19,7 +19,7 @@
     "@babel/preset-env": "^7.6.0",
     "aws-sdk": "^2.371.0",
     "babel-loader": "^7.1.4",
-    "babel-plugin-source-map-support": "^1.0.0",
+    "babel-plugin-source-map-support": "^2.1.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-3": "^6.24.1",

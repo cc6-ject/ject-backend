@@ -16,7 +16,7 @@
     "@babel/core": "^7.7.4",
     "@babel/helper-module-imports": "^7.7.4",
     "@babel/plugin-transform-runtime": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-env": "^7.7.7",
     "aws-sdk": "^2.580.0",
     "babel-loader": "^7.1.4",
     "babel-plugin-source-map-support": "^1.0.0",

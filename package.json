@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
-    "@babel/helper-module-imports": "^7.12.5",
+    "@babel/helper-module-imports": "^7.13.12",
     "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "aws-sdk": "^2.834.0",
